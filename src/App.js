@@ -6,6 +6,8 @@ function App() {
 
   const [location, setLocation] = useState('');
   const [fahrenheit, setFahrenheit] = useState(false);
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
 
   const searchNewWeather = (event) => {
 
@@ -14,6 +16,17 @@ function App() {
   const checkedFahrenheit = (event) => {
     setFahrenheit(!fahrenheit);
   }
+
+    // To get the current position 
+  // refer to this website: https://www.pluralsight.com/guides/how-to-use-geolocation-call-in-reactjs
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function(currentLocation){
+      setLatitude(currentLocation.coords.latitude);
+      setLongitude(currentLocation.coords.longitude);
+    });
+    console.log("latitude: ", latitude);
+    console.log("longitude: ", longitude);
+  },[latitude, longitude])
 
   return (
     <div>
