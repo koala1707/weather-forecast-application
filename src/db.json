@@ -1,0 +1,19 @@
+{
+    "hours": 
+    [
+        {"airTemperature": {"noaa": 18.94, "sg": 18.94}, "time": "2023-02-27T00:00:00+00:00", "waveHeight": {"icon": 0.32, "noaa": 0.33, "sg": 0.32}},
+        {"airTemperature": {"noaa": 20.12, "sg": 20.12}, "time": "2023-02-27T01:00:00+00:00", "waveHeight": {"icon": 0.29, "noaa": 0.3, "sg": 0.29}},
+        {"airTemperature": {"noaa": 16.18, "sg": 16.18}, "time": "2023-02-27T02:00:00+00:00", "waveHeight": {"icon": 0.8, "noaa": 0.82, "sg": 0.8}},
+        {"airTemperature": {"noaa": 16.65, "sg": 16.65}, "time": "2023-02-28T18:00:00+00:00", "waveHeight": {"icon": 0.78, "noaa": 0.82, "sg": 0.78}},
+        {"airTemperature": {"noaa": 1.65, "sg": 16.65}, "time": "2023-02-28T19:00:00+00:00", "waveHeight": {"icon": 0.78, "noaa": 0.82, "sg": 0.78}},
+        {"airTemperature": {"noaa": 6.65, "sg": 16.65}, "time": "2023-02-28T20:00:00+00:00", "waveHeight": {"icon": 0.78, "noaa": 0.82, "sg": 0.78}},
+        {"airTemperature": {"noaa": 19.65, "sg": 16.65}, "time": "2023-02-28T21:00:00+00:00", "waveHeight": {"icon": 0.78, "noaa": 0.82, "sg": 0.78}},
+        {"airTemperature": {"noaa": 10.65, "sg": 16.65}, "time": "2023-03-01T00:00:00+00:00", "waveHeight": {"icon": 0.78, "noaa": 0.82, "sg": 0.78}},
+        {"airTemperature": {"noaa": 6.65, "sg": 16.65}, "time": "2023-03-02T00:00:00+00:00", "waveHeight": {"icon": 0.78, "noaa": 0.82, "sg": 0.78}},
+        {"airTemperature": {"noaa": 1.65, "sg": 16.65}, "time": "2023-03-03T00:00:00+00:00", "waveHeight": {"icon": 0.78, "noaa": 0.82, "sg": 0.78}},
+        {"airTemperature": {"noaa": 186.5, "sg": 16.65}, "time": "2023-03-04T00:00:00+00:00", "waveHeight": {"icon": 0.78, "noaa": 0.82, "sg": 0.78}},
+        {"airTemperature": {"noaa": 3.05, "sg": 16.65}, "time": "2023-03-05T00:00:00+00:00", "waveHeight": {"icon": 0.78, "noaa": 0.82, "sg": 0.78}}
+        
+    ],
+    "meta": {"cost": 1, "dailyQuota": 10, "lat": -34.8887724, "lng": 138.5637543}
+}
