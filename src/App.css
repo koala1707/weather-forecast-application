@@ -18,8 +18,8 @@
 
 
 .weather-container {
-  max-width: 1200px;
-  height: 700px;
+  max-width: 800px;
+  height: 600px;
   margin: 0px auto 0;
   position: relative;
   overflow: hidden;
@@ -33,4 +33,11 @@
   position: absolute;
   top: 10px;
   right: 30px;
+}
+
+.payment-error {
+  color: chocolate;
+  font-weight: 700;
+  font-size: 30px;
+  margin: 200px auto;
 }
