@@ -52,6 +52,8 @@ function App() {
   const params = 'waveHeight,airTemperature';
 
   const GEO_API = 'c2b5525f2a4aac7825c56f17fa158fe0'
+
+  const [error, setError] = useState('');
   
   const searchNewWeather = (event) => {
     setSearch(true)
@@ -85,36 +87,42 @@ function App() {
     }
     console.log("latitude: ", latitude);
     console.log("longitude: ", longitude);
-
+      
+    
     fetch(`https://api.stormglass.io/v2/weather/point?lat=${latitude}&lng=${longitude}&params=${params}`, {
       headers: {
         'Authorization': '5c1f56e4-b685-11ed-bce5-0242ac130002-5c1f5856-b685-11ed-bce5-0242ac130002'
       }
     })
-    .then((response) => response.json()
-    .then((weatherResult) => {
+    .then(response => {
+      if(!response.ok){
+        if(response.status == 402){
+          throw Error('API runs over 5 times. Need to pay.')
+        }
+        else{
+          throw Error(`Error ${response.status}. Invalid data is provided.`)
+        }
+      }
+      return response.json()
+    })
+    .then(weatherResult => {
       setWeatherList(weatherResult["hours"])
       let collectedData = collectData(weatherList)
       // Problem: First a couple of days are broken down into 24 hours not just a day.
       // Solution: Restore data to calculate the average temparature. 
       let allData = calculateAverageTemperature(collectedData)
       allData.map((data, index) => {
-      setMapList(mapList => mapList.concat({date: data[0], cdegree: data[1], fdegree: data[2]}));
+        setMapList(mapList => mapList.concat({date: data[0], cdegree: data[1], fdegree: data[2]}));
+      })
     })
-    }))
+    .catch (error => {
+      setError(error.message)
+      // console.log(error.message);
+    })
     console.log("weather", weatherList)
     console.log("map",mapList)
-
+    
   },[latitude, longitude, search])
-
-  // To get the weather at the current location
-  //https://docs.stormglass.io/?_ga=2.77814812.945795123.1677491875-503126060.1677491875&_gl=1*197ip5k*_ga*NTAzMTI2MDYwLjE2Nzc0OTE4NzU.*_ga_79XDW52F27*MTY3NzQ5MTg3NS4xLjEuMTY3NzQ5MjU2My4wLjAuMA..#/weather
-  // useEffect(() => {
-    
-    
-  // },[latitude, longitude]);
-
-  
 
   return (
     <div>
@@ -131,13 +139,14 @@ function App() {
         </div>
         <h2>Weather Forecast</h2>
         <div>
+          {error && <div className='payment-error'>{ error }</div>}
         {mapList.slice(0,7).map((d, i) => {
           return(
           <div key={i}>
             <li>Date</li>
-            <a>{d.date}</a>
+            <p>{d.date}</p>
             <li>Temperature</li>
-            <div>{fahrenheit ? `${d.fdegree}F` : `${d.cdegree}C` }</div>
+            <p>{fahrenheit ? `${d.fdegree}F` : `${d.cdegree}C` }</p>
           </div>
           )})}
         </div>
