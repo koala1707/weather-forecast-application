@@ -88,8 +88,8 @@ function App() {
     console.log("latitude: ", latitude);
     console.log("longitude: ", longitude);
       
-    
-    fetch(`https://api.stormglass.io/v2/weather/point?lat=${latitude}&lng=${longitude}&params=${params}`, {
+    if(latitude && longitude != null){
+      fetch(`https://api.stormglass.io/v2/weather/point?lat=${latitude}&lng=${longitude}&params=${params}`, {
       headers: {
         'Authorization': '5c1f56e4-b685-11ed-bce5-0242ac130002-5c1f5856-b685-11ed-bce5-0242ac130002'
       }
@@ -100,7 +100,7 @@ function App() {
           throw Error('API runs over 5 times. Need to pay.')
         }
         else{
-          throw Error(`Error ${response.status}. Invalid data is provided.`)
+          throw Error(`Error ${response.status}. Couldn't fetch data.`)
         }
       }
       return response.json()
@@ -121,6 +121,8 @@ function App() {
     })
     console.log("weather", weatherList)
     console.log("map",mapList)
+    }
+    
     
   },[latitude, longitude, search])
 
