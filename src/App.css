@@ -12,8 +12,10 @@
 .submit-button {
   /* padding: 5px 15px; */
   cursor: pointer;
-  width: 200px;
-  position: relative;
+  width: 100px;
+  position:absolute;
+  left: 10px;
+  top: 10px;
 }
 
 
@@ -43,5 +45,5 @@
 }
 
 .location {
-  
+
 }

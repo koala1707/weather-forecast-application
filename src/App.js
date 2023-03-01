@@ -2,10 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, Checkbox, TableContainer, TableHead, TableRow, TableBody, TableCell } from '@material-ui/core';
 import { Paper, Table } from '@mui/material'
-import { styled } from '@mui/material/styles';
 import json from './db.json'
-
-
 
 
 // Data which is fetched from API is formated such as [Date, Temperature]
@@ -72,15 +69,12 @@ function App() {
   // To get the current position 
   // refer to this website to find the current location: https://www.pluralsight.com/guides/how-to-use-geolocation-call-in-reactjs
   useEffect(() => {
-    console.log("search", search)
-
     // Search a location
     if(search){
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`)
       .then((res) => res.json()
       .then((geo) => {
-        console.log("geo", geo)
-
+        // console.log("geo", geo)
         setLatitude(geo.coord.lat)
         setLongitude(geo.coord.lon)
       }))
@@ -92,12 +86,12 @@ function App() {
         setLongitude(currentLocation.coords.longitude);
       });
     }
-    console.log("latitude: ", latitude);
-    console.log("longitude: ", longitude);
   },[latitude, longitude, search]);
 
   useEffect(() => {
     if(latitude && longitude != null){
+      console.log("latitude: ", latitude);
+      console.log("longitude: ", longitude);
       fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`)
       .then(response => {
         if(!response.ok){
@@ -107,9 +101,7 @@ function App() {
       })
       .then(weatherResult => {
         let collectedData = collectData(weatherResult['list'])
-        collectedData.map((data, index) => {
-          setMapList(mapList => mapList.concat({date: data[0], cdegree: data[1], fdegree: data[2]}))
-        })
+        setMapList(collectedData)
       })
       .catch (error => {
         setError(error.message)
@@ -134,26 +126,27 @@ function App() {
         <h3 className='location'>{search ? 'Searched Location' : 'Current Location'}</h3>
         <div>
           {error && <div className='payment-error'>{ error }</div>}
-              <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 500}} aria-lable="test">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Date</TableCell>
-                      <TableCell>Temperature</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {mapList.map((d, i) => {
-                      return(
-                        <TableRow key={i}>
-                          <TableCell component="th" scope="row">{d.date}</TableCell>
-                          <TableCell>{fahrenheit ? `${d.fdegree}F` : `${d.cdegree}C`}</TableCell>
-                        </TableRow>          
-                      )
-                    })}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 300}} aria-label="test">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Temperature</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {mapList.map((d, i) => {
+                  console.log("d", d)
+                  return(
+                    <TableRow key={i}>
+                      <TableCell component="th" scope="row">{d[0]}</TableCell>
+                      <TableCell>{fahrenheit ? `${d[2]}F` : `${d[1]}C`}</TableCell>
+                    </TableRow>          
+                  )
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       </div>
     </div>
