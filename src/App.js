@@ -35,7 +35,6 @@ function calculateAverageTemperature(data) {
     let sumTemperature = temparatures.reduce((a, b) => (a + b))
     let averageTemperature = sumTemperature / temparatures.length
     let calculateFahrenheit = (averageTemperature * 1.8) + 32
-    // aveTempList.push([data[key][0],averageTemperature.toFixed(2), calculateFahrenheit.toFixed(2)])
     aveTempList.push({date: data[key][0], cel: averageTemperature.toFixed(2), fah: calculateFahrenheit.toFixed(2)})
   }
   return aveTempList
